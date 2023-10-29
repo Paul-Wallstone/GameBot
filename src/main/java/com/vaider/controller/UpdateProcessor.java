@@ -1,6 +1,7 @@
 package com.vaider.controller;
 
 
+import com.vaider.service.GameProcessor;
 import com.vaider.utils.MessageUtils;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
@@ -19,11 +20,14 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 public class UpdateProcessor {
     TelegramBot telegramBot;
     final MessageUtils messageUtils;
+    final GameProcessor gameProcessor;
+
 
 
     @Autowired
-    public UpdateProcessor(MessageUtils messageUtils) {
+    public UpdateProcessor(MessageUtils messageUtils, GameProcessor gameProcessor) {
         this.messageUtils = messageUtils;
+        this.gameProcessor = gameProcessor;
     }
 
     public void registerBot(TelegramBot telegramBot) {
@@ -52,7 +56,7 @@ public class UpdateProcessor {
     }
 
     private void processTextMessage(Update update) {
-        var sendMessage = messageUtils.generateSendMessageWithText(update, "Success!");
+        var sendMessage = gameProcessor.processTextMessage(update);
         sendView(sendMessage);
     }
 
