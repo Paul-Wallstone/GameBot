@@ -1,0 +1,12 @@
+server:
+  port: 8084
+  ssl:
+    enabled: false
+bot:
+  name: ${BOT_NAME}
+  token: ${BOT_TOKEN}
+  uri: ${BOT_URI}
+
+logging:
+  level:
+    root: INFO
